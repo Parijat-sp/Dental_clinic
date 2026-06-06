@@ -1,0 +1,34 @@
+.footer { background: var(--clr-navy); color: rgba(255,255,255,.7); }
+.footerInner { display: grid; grid-template-columns: 1.5fr 2fr; gap: var(--space-16); padding-top: var(--space-16); padding-bottom: var(--space-12); }
+.footerBrand .logo { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.logoText { font-size: 1.25rem; font-weight: 800; color: var(--clr-white); letter-spacing: -.02em; }
+.logoAccent { color: var(--clr-primary); }
+.footerBrand p { font-size: .9rem; line-height: 1.7; margin-bottom: var(--space-6); }
+
+.footerSocial { display: flex; gap: var(--space-3); }
+.socialLink {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,.08); border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.7); transition: all var(--transition-fast);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.socialLink svg { width: 18px; height: 18px; }
+.socialLink:hover { background: var(--clr-primary); color: white; border-color: var(--clr-primary); transform: translateY(-2px); }
+
+.footerNav { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-8); }
+.footerNavCol h3 { font-size: .875rem; font-weight: 700; color: var(--clr-white); text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--space-5); }
+.footerNavCol ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.footerNavCol a { font-size: .9rem; color: rgba(255,255,255,.6); transition: color var(--transition-fast); }
+.footerNavCol a:hover { color: var(--clr-white); }
+
+.footerBottom { border-top: 1px solid rgba(255,255,255,.08); padding: var(--space-6) 0; }
+.footerBottomInner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.footerBottomInner p { font-size: .875rem; color: rgba(255,255,255,.4); }
+.footerLegal { display: flex; gap: var(--space-5); }
+.footerLegal a { font-size: .875rem; color: rgba(255,255,255,.4); transition: color var(--transition-fast); }
+.footerLegal a:hover { color: rgba(255,255,255,.8); }
+
+@media (max-width: 1024px) { .footerNav { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .footerInner { grid-template-columns: 1fr; gap: var(--space-8); } .footerBottomInner { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 480px) { .footerNav { grid-template-columns: 1fr; } }

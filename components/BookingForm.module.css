@@ -1,0 +1,94 @@
+.bookingSection { background: linear-gradient(160deg, #f0f9ff 0%, var(--clr-surface) 100%); }
+.bookingInner { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-12); align-items: start; }
+
+.bookingInfo h2 { font-family: var(--font-display); font-size: clamp(1.75rem,4vw,2.5rem); color: var(--clr-navy); margin-bottom: var(--space-4); }
+.bookingInfo > p { font-size: 1.0625rem; color: var(--clr-slate); line-height: 1.7; margin-bottom: var(--space-8); }
+
+.bookingHours { background: var(--clr-white); border-radius: var(--radius-lg); padding: var(--space-6); border: 1px solid var(--clr-border); margin-bottom: var(--space-6); }
+.hoursTitle { font-size: .9375rem; font-weight: 700; color: var(--clr-navy); margin-bottom: var(--space-4); }
+.hoursList { display: flex; flex-direction: column; gap: var(--space-3); }
+.hoursRow { display: flex; justify-content: space-between; font-size: .9rem; padding-bottom: var(--space-3); border-bottom: 1px solid var(--clr-border); }
+.hoursRow:last-child { border-bottom: none; padding-bottom: 0; }
+.hoursRow dt { color: var(--clr-slate); }
+.hoursRow dd { font-weight: 600; color: var(--clr-navy); }
+
+.bookingContact { display: flex; flex-direction: column; gap: var(--space-4); }
+.contactItem { display: flex; align-items: flex-start; gap: var(--space-3); font-size: .9375rem; color: var(--clr-slate); transition: color var(--transition-fast); }
+.contactItem svg { width: 18px; height: 18px; color: var(--clr-primary); flex-shrink: 0; margin-top: 2px; }
+a.contactItem:hover { color: var(--clr-primary); }
+.contactAddress { cursor: default; }
+
+.bookingFormWrap { background: var(--clr-white); border-radius: var(--radius-xl); padding: var(--space-8); box-shadow: var(--shadow-xl); border: 1px solid var(--clr-border); }
+.formTitle { font-size: 1.375rem; font-weight: 700; color: var(--clr-navy); margin-bottom: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--clr-border); }
+
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.formGroup { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+.fullWidth { grid-column: 1 / -1; }
+.formGroup label { font-size: .875rem; font-weight: 600; color: var(--clr-navy); }
+.required { color: var(--clr-error); margin-left: 2px; }
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%; padding: .6875rem var(--space-4);
+  border: 1.5px solid var(--clr-border); border-radius: var(--radius-md);
+  font-size: .9375rem; color: var(--clr-navy); background: var(--clr-white);
+  transition: all var(--transition-fast); appearance: none; -webkit-appearance: none;
+  font-family: inherit;
+}
+.formGroup select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
+  padding-right: var(--space-10);
+}
+.formGroup input:focus, .formGroup select:focus, .formGroup textarea:focus {
+  border-color: var(--clr-primary); box-shadow: 0 0 0 3px rgba(14,165,233,.12); outline: none;
+}
+.invalid { border-color: var(--clr-error) !important; }
+.formGroup input::placeholder, .formGroup textarea::placeholder { color: var(--clr-slate-light); }
+
+.fieldError { font-size: .8125rem; color: var(--clr-error); min-height: 1.2em; }
+.fieldHint  { font-size: .8125rem; color: var(--clr-slate-light); }
+
+.formCheckbox { flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+.checkboxLabel { display: flex; align-items: flex-start; gap: var(--space-3); font-size: .875rem; color: var(--clr-slate); cursor: pointer; line-height: 1.5; }
+.checkboxLabel input[type='checkbox'] { position: absolute; opacity: 0; width: 0; height: 0; }
+.checkboxCustom {
+  width: 18px; height: 18px; border: 2px solid var(--clr-border); border-radius: 4px;
+  flex-shrink: 0; margin-top: 2px; transition: all var(--transition-fast);
+  display: flex; align-items: center; justify-content: center;
+}
+.checkboxLabel input:checked + .checkboxCustom { background: var(--clr-primary); border-color: var(--clr-primary); }
+.checkboxLabel input:checked + .checkboxCustom::after {
+  content: ''; display: block; width: 5px; height: 9px;
+  border: 2px solid white; border-top: none; border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+}
+.checkboxLabel input:focus + .checkboxCustom { box-shadow: 0 0 0 3px rgba(14,165,233,.2); }
+.formLink { color: var(--clr-primary); text-decoration: underline; }
+
+.submitBtn { margin-top: var(--space-2); }
+.submitBtn:disabled { opacity: .7; cursor: not-allowed; transform: none !important; }
+
+.spinner {
+  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: white; border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.formSuccess {
+  background: #dcfce7; border: 1px solid #86efac; border-radius: var(--radius-md);
+  padding: var(--space-5); display: flex; align-items: flex-start; gap: var(--space-4);
+  margin-top: var(--space-4); color: #166534; animation: fadeSlideDown .4s ease both;
+}
+.formSuccess svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--clr-success); }
+.formSuccess strong { display: block; margin-bottom: var(--space-1); }
+.formSuccess p { font-size: .875rem; }
+
+.formDisclaimer { font-size: .8125rem; color: var(--clr-slate-light); text-align: center; display: flex; align-items: center; justify-content: center; gap: var(--space-2); margin-top: var(--space-4); }
+.formDisclaimer svg { color: var(--clr-success); }
+
+@media (max-width: 1024px) { .bookingInner { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .formRow { grid-template-columns: 1fr; } .bookingFormWrap { padding: var(--space-5); } }

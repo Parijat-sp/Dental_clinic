@@ -1,0 +1,91 @@
+.hero {
+  min-height: calc(100vh - var(--navbar-height) - 40px);
+  background: linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 35%, #f8fafc 70%, #fff 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  padding: var(--space-16) 0;
+}
+.heroBgShapes { position: absolute; inset: 0; pointer-events: none; }
+.shape { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .45; }
+.shape1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #bae6fd, transparent);
+  top: -200px; right: -100px;
+  animation: float1 8s ease-in-out infinite;
+}
+.shape2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #a5f3fc, transparent);
+  bottom: -100px; left: -100px;
+  animation: float2 10s ease-in-out infinite;
+}
+.shape3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #c7d2fe, transparent);
+  top: 50%; right: 35%;
+  animation: float1 12s ease-in-out infinite reverse;
+}
+.heroInner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--space-12); align-items: center;
+  position: relative; z-index: 1;
+}
+.heroBadge {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e; font-size: .8125rem; font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full); margin-bottom: var(--space-5);
+  border: 1px solid #fcd34d; width: fit-content;
+  animation: fadeSlideDown .6s ease both;
+}
+.heroBadge svg { width: 14px; height: 14px; fill: #d97706; }
+.heroH1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  color: var(--clr-navy); letter-spacing: -.03em; line-height: 1.1;
+  margin-bottom: var(--space-5);
+  animation: fadeSlideDown .7s ease .1s both;
+}
+.heroSub {
+  font-size: 1.0625rem; color: var(--clr-slate); line-height: 1.75;
+  max-width: 520px; margin-bottom: var(--space-8);
+  animation: fadeSlideDown .7s ease .2s both;
+}
+.heroActions {
+  display: flex; gap: var(--space-4); flex-wrap: wrap;
+  margin-bottom: var(--space-10);
+  animation: fadeSlideDown .7s ease .3s both;
+}
+.heroTrust {
+  display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;
+  animation: fadeSlideDown .7s ease .4s both;
+}
+.trustItem { display: flex; align-items: center; gap: var(--space-2); font-size: .875rem; color: var(--clr-slate); }
+.trustItem svg { width: 16px; height: 16px; fill: #f59e0b; }
+.trustItem strong { color: var(--clr-navy); }
+.trustDivider { width: 1px; height: 24px; background: var(--clr-border); }
+.heroImageWrap { display: flex; justify-content: center; animation: fadeSlideUp .8s ease .2s both; }
+.heroImageCard { position: relative; border-radius: var(--radius-xl); overflow: visible; filter: drop-shadow(var(--shadow-xl)); }
+.heroImg { border-radius: var(--radius-xl); object-fit: cover; transition: transform var(--transition-slow); }
+.heroImageCard:hover .heroImg { transform: scale(1.02); }
+.heroBadgeFloating {
+  position: absolute; background: var(--clr-white); border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4); box-shadow: var(--shadow-lg);
+  font-size: .875rem; font-weight: 600; color: var(--clr-navy);
+  display: flex; align-items: center; gap: var(--space-2); white-space: nowrap;
+}
+.heroBadgeOpen { top: -16px; right: -16px; color: var(--clr-success); animation: float1 3s ease-in-out infinite; }
+.heroBadgeWait { bottom: -16px; left: -16px; }
+.heroBadgeWait svg { width: 16px; height: 16px; color: var(--clr-primary); }
+.badgeDot { width: 8px; height: 8px; background: var(--clr-success); border-radius: 50%; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+.heroContent { display: flex; flex-direction: column; }
+
+@media (max-width: 768px) {
+  .heroInner { grid-template-columns: 1fr; gap: var(--space-8); }
+  .heroImageWrap { order: -1; }
+  .heroActions { flex-direction: column; }
+  .heroActions :global(.btn) { width: 100%; justify-content: center; }
+  .heroTrust { justify-content: center; }
+  .heroBadgeFloating { display: none; }
+}
