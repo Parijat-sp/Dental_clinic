@@ -1,100 +1,142 @@
-import Image from 'next/image'
 import styles from './Hero.module.css'
+
+const stats = [
+  { number: '827+', label: 'Transform your smile quickly with our exceptional services.' },
+  { number: '170',  label: 'Performed surgeries' },
+  { number: '85',   label: 'Satisfied Patients' },
+  { number: '176',  label: 'Staff Members' },
+  { number: '98',   label: 'Yearly Surgeries' },
+]
+
+// Floating particles config
+const particles = [
+  { icon: '🦷', size: 28, top: '12%',  left: '5%',  delay: '0s',   dur: '6s'  },
+  { icon: '✨', size: 20, top: '70%',  left: '3%',  delay: '1.5s', dur: '5s'  },
+  { icon: '🦷', size: 18, top: '25%',  right: '4%', delay: '0.8s', dur: '7s'  },
+  { icon: '💊', size: 16, top: '80%',  right: '6%', delay: '2s',   dur: '5.5s'},
+  { icon: '⭐', size: 22, top: '50%',  left: '8%',  delay: '0.4s', dur: '8s'  },
+  { icon: '✨', size: 14, top: '10%',  right: '12%',delay: '1.2s', dur: '4.5s'},
+]
 
 export default function Hero() {
   return (
-    <section className={styles.hero} aria-labelledby="hero-heading">
-      <div className={styles.heroBgShapes} aria-hidden="true">
-        <div className={`${styles.shape} ${styles.shape1}`} />
-        <div className={`${styles.shape} ${styles.shape2}`} />
-        <div className={`${styles.shape} ${styles.shape3}`} />
+    <section className={styles.hero} id="home" aria-labelledby="hero-heading">
+      {/* Floating background particles */}
+      <div className={styles.particlesWrap} aria-hidden="true">
+        {particles.map((p, i) => (
+          <span
+            key={i}
+            className={styles.particle}
+            style={{
+              fontSize: p.size,
+              top: p.top,
+              left: 'left' in p ? p.left : undefined,
+              right: 'right' in p ? (p as { right: string }).right : undefined,
+              animationDelay: p.delay,
+              animationDuration: p.dur,
+            }}
+          >
+            {p.icon}
+          </span>
+        ))}
       </div>
 
-      <div className={`container ${styles.heroInner}`}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroBadge} aria-label="Award badge">
-            <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-              <path d="M8 1l1.9 3.8 4.2.6-3 3 .7 4.2L8 10.5l-3.8 2.1.7-4.2-3-3 4.2-.6z"/>
-            </svg>
-            Rated #1 Dental Clinic — 5 Years Running
+      <div className={`container ${styles.inner}`}>
+
+        {/* ── Left text column ── */}
+        <div className={styles.content}>
+          <div className={styles.datePill} aria-label="Clinic hours">
+            <span className={styles.dot} />
+            <span>We&apos;re Open Today · 09 AM – 16 PM</span>
           </div>
 
-          <h1 id="hero-heading" className={styles.heroH1}>
-            Your Healthiest, <br/>
-            <span className="text-gradient">Brightest Smile</span><br/>
-            Starts Here
+          <h1 id="hero-heading" className={styles.heading}>
+            Get a <span className={styles.accent}>Beautiful</span><br/>
+            Straight Smile<br/>
+            <span className={styles.accent}>Quickly.</span>
           </h1>
 
-          <p className={styles.heroSub}>
-            Compassionate, evidence-based dental care for every member of your family.
-            Our board-certified dentists combine cutting-edge technology with a gentle, patient-first approach.
+          <p className={styles.sub}>
+            Transform your smile quickly and effortlessly with our exceptional services.
+            We understand the importance of having a beautiful, straight smile and that&apos;s
+            why we offer efficient solutions tailored to your needs.
           </p>
 
-          <div className={styles.heroActions}>
-            <a href="#booking" className="btn btn-primary btn-lg">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Book Appointment
+          <div className={styles.actions}>
+            <a href="#booking" className={`btn btn-primary btn-lg ${styles.pulseBtn}`}>
+              Book Now
+              <span className={styles.pulseRing} aria-hidden="true"/>
             </a>
-            <a href="tel:+15551234567" className="btn btn-outline btn-lg">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 2 .7 3a2 2 0 01-.4 2L8.1 10a16 16 0 006 6l1.3-1.3a2 2 0 012-.5c1 .3 2 .6 3 .7a2 2 0 011.6 2z"/>
-              </svg>
-              Call (555) 123-4567
+            <a href="#services" className={styles.learnMore}>
+              <span className={styles.playBtn} aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              Our Services
             </a>
           </div>
 
-          <div className={styles.heroTrust} role="list" aria-label="Trust indicators">
-            <div className={styles.trustItem} role="listitem">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-                <path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 7L12 18l-6.3 3.2L7 14.2 2 9.3l7-1z"/>
-              </svg>
-              <span><strong>4.9/5</strong> Rating</span>
+          {/* Stats row */}
+          <div className={styles.statsRow} role="list" aria-label="Clinic statistics">
+            <div className={styles.statMain} role="listitem">
+              <span className={styles.statNum}>{stats[0].number}</span>
+              <span className={styles.statLabel}>{stats[0].label}</span>
             </div>
-            <div className={styles.trustDivider} aria-hidden="true" />
-            <div className={styles.trustItem} role="listitem">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-              </svg>
-              <span><strong>12,000+</strong> Happy Patients</span>
-            </div>
-            <div className={styles.trustDivider} aria-hidden="true" />
-            <div className={styles.trustItem} role="listitem">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              <span><strong>20+ Years</strong> Experience</span>
+            <div className={styles.statDivider} aria-hidden="true"/>
+            <div className={styles.statGrid} role="list">
+              {stats.slice(1).map(({ number, label }) => (
+                <div key={label} className={styles.statItem} role="listitem">
+                  <span className={styles.statNum}>{number}</span>
+                  <span className={styles.statLabel}>{label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className={styles.heroImageWrap} aria-hidden="true">
-          <div className={styles.heroImageCard}>
-            <Image
-              src="/assets/clinic_interior.png"
-              alt="Modern BrightSmile dental clinic interior"
-              width={520}
-              height={390}
+        {/* ── Right image column ── */}
+        <div className={styles.imageWrap} aria-hidden="true">
+          {/* Animated concentric rings */}
+          <div className={styles.ring1}/>
+          <div className={styles.ring2}/>
+          <div className={styles.ring3}/>
+
+          {/* Animated decorative blobs */}
+          <div className={styles.blob1}/>
+          <div className={styles.blob2}/>
+
+          {/* Floating date badge */}
+          <div className={styles.floatingCard}>
+            <div className={styles.fcIcon}>📅</div>
+            <div>
+              <div className={styles.fcTitle}>July 27, 2023</div>
+              <div className={styles.fcSub}>Next Appointment</div>
+            </div>
+          </div>
+
+          {/* Animated badge — top right */}
+          <div className={styles.ratingBadge}>
+            <span className={styles.ratingStars}>★★★★★</span>
+            <span className={styles.ratingText}>4.9 Rating</span>
+          </div>
+
+          <div className={styles.imageContainer}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/dental_hero.png"
+              alt="3D dental braces model showing orthodontic treatment"
               className={styles.heroImg}
-              priority
+              width={560}
+              height={520}
+              loading="eager"
             />
-            <div className={`${styles.heroBadgeFloating} ${styles.heroBadgeOpen}`}>
-              <span className={styles.badgeDot} />Open Now
-            </div>
-            <div className={`${styles.heroBadgeFloating} ${styles.heroBadgeWait}`} aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-              Avg. Wait: &lt;10 min
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <a href="#services" className={styles.scrollIndicator} aria-label="Scroll to services">
+        <span className={styles.scrollDot}/>
+      </a>
     </section>
   )
 }

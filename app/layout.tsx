@@ -16,15 +16,15 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'BrightSmile Dental Clinic – Your Smile, Our Priority',
+  title: 'Dental Clinic – Your Smile, Our Priority',
   description:
-    'BrightSmile Dental Clinic – Trusted, compassionate dental care for your whole family. Book an appointment with our expert dentists today.',
+    'Dental Clinic – Trusted, compassionate dental care for your whole family. Book an appointment with our expert dentists today.',
   keywords: [
     'dental clinic', 'dentist', 'teeth whitening', 'orthodontics',
-    'family dentistry', 'dental care', 'BrightSmile',
+    'family dentistry', 'dental care',
   ],
   openGraph: {
-    title: 'BrightSmile Dental Clinic – Your Smile, Our Priority',
+    title: 'Dental Clinic – Your Smile, Our Priority',
     description: 'Premium dental care with a gentle touch. Serving families for over 20 years.',
     type: 'website',
   },

@@ -1,22 +1,22 @@
-.trustBar {
-  background: var(--clr-white);
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.bar {
+  background: var(--clr-surface);
   border-top: 1px solid var(--clr-border);
   border-bottom: 1px solid var(--clr-border);
-  padding: var(--space-6) 0;
+  padding: var(--space-5) 0;
+  overflow: hidden;
 }
-.trustBarInner {
-  display: flex; align-items: center;
-  gap: var(--space-8); overflow-x: auto; scrollbar-width: none;
+.track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marqueeScroll 22s linear infinite;
 }
-.trustBarInner::-webkit-scrollbar { display: none; }
-.trustBarLabel {
-  font-size: .8125rem; font-weight: 600; color: var(--clr-slate-light);
-  text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; flex-shrink: 0;
-}
-.trustLogos { display: flex; align-items: center; gap: var(--space-6); flex: 1; }
-.trustLogoItem { flex-shrink: 0; opacity: .75; transition: opacity var(--transition-base); }
-.trustLogoItem:hover { opacity: 1; }
-
-@media (max-width: 768px) {
-  .trustBarInner { flex-direction: column; align-items: flex-start; }
-}
+.track:hover { animation-play-state: paused; }
+.marquee { display: flex; align-items: center; gap: var(--space-6); padding: 0 var(--space-3); }
+.item { flex-shrink: 0; opacity: .8; transition: opacity var(--transition-base); }
+.item:hover { opacity: 1; }

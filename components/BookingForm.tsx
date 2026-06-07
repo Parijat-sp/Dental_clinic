@@ -78,12 +78,12 @@ export default function BookingForm() {
               </svg>
               (555) 123-4567
             </a>
-            <a href="mailto:hello@brightsmile.com" className={styles.contactItem}>
+            <a href="mailto:hello@dentalclinic.com" className={styles.contactItem}>
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
-              hello@brightsmile.com
+              hello@dentalclinic.com
             </a>
             <div className={`${styles.contactItem} ${styles.contactAddress}`}>
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">

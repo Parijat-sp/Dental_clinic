@@ -1,67 +1,70 @@
+import ScrollReveal from './ScrollReveal'
 import styles from './Testimonials.module.css'
 
 const testimonials = [
   {
-    stars: '★★★★★',
-    quote: 'I used to be terrified of the dentist, but BrightSmile completely changed that. Dr. Mitchell is so patient and explains every step. My smile has never looked better!',
-    initials: 'MR',
-    name: 'Maria Rodriguez',
-    role: 'Patient since 2019',
-    featured: false,
+    quote: 'The clinic is also exceptionally clean and prioritizes hygiene. They follow strict cleanliness protocols, which gives me added confidence that I am in a safe environment for dental care.',
+    name: 'Selina Martin',
+    role: 'Patient Manager',
+    initials: 'SM',
   },
   {
-    stars: '★★★★★',
-    quote: 'Dr. Thornton performed my implant surgery and it was absolutely painless. The entire team made me feel at ease. I can\'t believe I waited so long to get this done. Highly recommend!',
-    initials: 'JK',
+    quote: 'Dr. Mitchell transformed my smile completely. I had veneers done and the results are beyond what I imagined. The whole team is warm, professional, and incredibly skilled.',
     name: 'James Kowalski',
     role: 'Dental Implant Patient',
+    initials: 'JK',
     featured: true,
   },
   {
-    stars: '★★★★★',
-    quote: "Dr. Mehta's Invisalign treatment transformed my teen's confidence. The patient portal is amazing — we track progress and schedule appointments easily. 10/10!",
-    initials: 'LP',
+    quote: "My son's braces journey with Dr. Mehta was phenomenal. He explained everything in detail and the Invisalign results speak for themselves. Highly recommend to any parent!",
     name: 'Laura Peterson',
-    role: "Orthodontic Patient's Parent",
-    featured: false,
+    role: "Parent of Ortho Patient",
+    initials: 'LP',
   },
 ]
 
 export default function Testimonials() {
   return (
-    <section className={`${styles.testimonials} section-padding`} id="testimonials" aria-labelledby="testimonials-heading">
+    <section className={`section-padding ${styles.section}`} id="testimonials" aria-labelledby="testimonials-heading">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Patient Stories</span>
-          <h2 id="testimonials-heading">What Our Patients Say</h2>
-          <p>Real experiences from real families who trust BrightSmile with their oral health.</p>
+          <span className="section-tag">Patient Reviews</span>
+          <h2 id="testimonials-heading">What Our <span>Patients</span> Say</h2>
+          <p>Real experiences from real families who trust Dental Clinic with their oral health.</p>
         </div>
 
-        <div className={styles.testimonialsGrid} role="list">
-          {testimonials.map(({ stars, quote, initials, name, role, featured }) => (
-            <article key={name} className={`${styles.testimonialCard} ${featured ? styles.featured : ''}`} role="listitem">
-              <div className={styles.testimonialStars} aria-label="5 out of 5 stars">{stars}</div>
-              <blockquote><p className={styles.testimonialQuote}>&ldquo;{quote}&rdquo;</p></blockquote>
-              <footer className={styles.testimonialAuthor}>
-                <div className={styles.testimonialAvatar} aria-hidden="true">{initials}</div>
-                <div>
-                  <strong>{name}</strong>
-                  <span>{role}</span>
+        <div className={styles.grid} role="list">
+          {testimonials.map(({ quote, name, role, initials, featured }, i) => (
+            <ScrollReveal key={name} delay={i * 100} direction="up">
+              <article className={`${styles.card} ${featured ? styles.featured : ''}`} role="listitem">
+                <div className={styles.quoteIcon} aria-hidden="true">“</div>
+                <p className={styles.quote}>{quote}</p>
+                <div className={styles.readMore}>
+                  <a href="#" className={styles.readLink}>Read More →</a>
                 </div>
-              </footer>
-            </article>
+                <footer className={styles.author}>
+                  <div className={styles.avatar} aria-hidden="true">{initials}</div>
+                  <div>
+                    <strong>{name}</strong>
+                    <span>{role}</span>
+                  </div>
+                </footer>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
 
-        <div className={styles.testimonialsSummary} aria-label="Review summary">
-          <div className={styles.summaryRating}>
-            <span className={styles.summaryScore} aria-label="Overall rating 4.9 out of 5">4.9</span>
-            <div className={styles.summaryStars} aria-hidden="true">★★★★★</div>
-            <span className={styles.summaryCount}>Based on 847 reviews</span>
+        <div className={styles.ratingBar} aria-label="Overall rating summary">
+          <div className={styles.rating}>
+            <span className={styles.score}>4.9</span>
+            <div>
+              <div className={styles.stars} aria-label="5 stars">★★★★★</div>
+              <span className={styles.count}>Based on 847 verified reviews</span>
+            </div>
           </div>
-          <div className={styles.summaryPlatforms}>
-            {['Google Reviews', 'Healthgrades', 'Zocdoc'].map((p) => (
-              <span key={p} className={styles.platformBadge}>{p}</span>
+          <div className={styles.platforms}>
+            {['Google Reviews', 'Healthgrades', 'Zocdoc'].map(p => (
+              <span key={p} className={styles.badge}>{p}</span>
             ))}
           </div>
         </div>

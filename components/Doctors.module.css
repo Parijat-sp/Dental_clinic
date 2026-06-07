@@ -1,50 +1,64 @@
-.doctors { background: var(--clr-white); }
-.doctorsGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-8); }
+.section { background: var(--clr-surface); }
+.header { text-align: left; margin-left: 0; }
+.header h2 span { color: var(--clr-blue); }
 
-.doctorCard {
-  background: var(--clr-white); border-radius: var(--radius-xl);
-  border: 1px solid var(--clr-border); overflow: hidden;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.card {
+  background: var(--clr-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
   transition: all var(--transition-base);
-  display: flex; flex-direction: column;
 }
-.doctorCard:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: var(--clr-primary-light); }
+.card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: transparent; }
 
-.doctorImgWrap { position: relative; overflow: hidden; height: 280px; }
-.doctorImg { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform var(--transition-slow); }
-.doctorCard:hover .doctorImg { transform: scale(1.05); }
-
-.doctorAvailability {
-  position: absolute; bottom: var(--space-3); left: var(--space-3);
-  background: rgba(255,255,255,.95); backdrop-filter: blur(8px);
-  color: var(--clr-success); font-size: .8125rem; font-weight: 600;
-  padding: var(--space-2) var(--space-3); border-radius: var(--radius-full);
-  display: flex; align-items: center; gap: var(--space-2);
-  box-shadow: var(--shadow-sm);
+/* Grayscale image with color on hover */
+.imgWrap { position: relative; overflow: hidden; aspect-ratio: 3/3.5; }
+.img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover; object-position: top center;
+  filter: grayscale(100%);
+  transition: filter var(--transition-slow), transform var(--transition-slow);
 }
-.limited { color: var(--clr-warning); }
-.availDot { width: 8px; height: 8px; background: var(--clr-success); border-radius: 50%; animation: pulse 2s ease infinite; }
-.availDotAmber { background: var(--clr-warning); }
+.card:hover .img { filter: grayscale(0%); transform: scale(1.04); }
 
-.doctorInfo {
-  padding: var(--space-6); flex: 1;
-  display: flex; flex-direction: column; gap: var(--space-3);
+/* Dark overlay */
+.overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,43,.6) 0%, transparent 50%);
+  opacity: 0; transition: opacity var(--transition-base);
 }
-.doctorInfo h3 { font-size: 1.1875rem; font-weight: 700; color: var(--clr-navy); }
-.doctorTitle { font-size: .875rem; color: var(--clr-primary); font-weight: 600; margin-top: calc(-1 * var(--space-2)); }
-.doctorBio { font-size: .9rem; color: var(--clr-slate); line-height: 1.65; }
+.card:hover .overlay { opacity: 1; }
 
-.doctorSpecialties { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.specialtyTag {
-  background: var(--clr-primary-light); color: var(--clr-primary-dark);
-  font-size: .75rem; font-weight: 600;
-  padding: var(--space-1) var(--space-3); border-radius: var(--radius-full);
+/* Social icons – slide up on hover */
+.socials {
+  position: absolute; bottom: var(--space-4); left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  display: flex; gap: var(--space-2);
+  opacity: 0; transition: all var(--transition-base);
 }
+.card:hover .socials { opacity: 1; transform: translateX(-50%) translateY(0); }
+.socialBtn {
+  width: 34px; height: 34px;
+  background: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--clr-navy); transition: all var(--transition-fast);
+}
+.socialBtn svg { width: 15px; height: 15px; }
+.socialBtn:hover { background: var(--clr-blue); color: white; }
 
-.doctorCredentials { display: flex; flex-direction: column; gap: var(--space-2); }
-.credential { display: flex; align-items: flex-start; gap: var(--space-2); font-size: .8125rem; color: var(--clr-slate); }
-.credential svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--clr-primary); }
+/* Featured card – slightly larger */
+.featured { border-color: var(--clr-blue); }
 
-.doctorInfo :global(.btn-outline) { margin-top: auto; align-self: flex-start; }
+.info { padding: var(--space-5) var(--space-6); }
+.info h3 { font-size: 1.0625rem; font-weight: 700; color: var(--clr-navy); margin-bottom: var(--space-1); }
+.info p  { font-size: .875rem; color: var(--clr-blue); font-weight: 600; }
 
-@media (max-width: 1024px) { .doctorsGrid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 768px)  { .doctorsGrid { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }

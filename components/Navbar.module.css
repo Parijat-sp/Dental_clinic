@@ -1,99 +1,52 @@
-.announcementBar {
-  background: linear-gradient(90deg, var(--clr-primary-dark), var(--clr-accent));
-  color: var(--clr-white);
-  text-align: center;
-  padding: var(--space-2) var(--space-4);
-  font-size: .875rem;
-  font-weight: 500;
-  position: relative;
-  z-index: 100;
-}
-.announcementLink {
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  margin-left: var(--space-2);
-}
-.announcementLink:hover { opacity: .8; }
-
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(255,255,255,.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 999;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--clr-border);
   transition: box-shadow var(--transition-base);
 }
-.scrolled { box-shadow: var(--shadow-md); }
-
-.navInner {
-  display: flex;
-  align-items: center;
+.scrolled { box-shadow: 0 2px 20px rgba(13,13,43,.08); }
+.inner {
+  display: flex; align-items: center;
   justify-content: space-between;
   height: var(--navbar-height);
   gap: var(--space-6);
 }
-
 .logo { display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0; }
-.logoIcon { width: 36px; height: 36px; }
 .logoText { font-size: 1.25rem; font-weight: 800; color: var(--clr-navy); letter-spacing: -.02em; }
-.logoAccent { color: var(--clr-primary); }
+.logoAccent { color: var(--clr-blue); }
 
-.navMenu {
-  display: flex; align-items: center; gap: var(--space-6);
-}
+.navMenu { display: flex; align-items: center; gap: var(--space-8); }
 .navLink {
   font-size: .9375rem; font-weight: 500; color: var(--clr-slate);
   position: relative; padding-bottom: 2px;
+  transition: color var(--transition-fast);
 }
 .navLink::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 0; width: 0; height: 2px;
-  background: var(--clr-primary); border-radius: var(--radius-full);
-  transition: width var(--transition-base);
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--clr-blue);
+  transition: width var(--transition-base); border-radius: 2px;
 }
 .navLink:hover { color: var(--clr-navy); }
 .navLink:hover::after { width: 100%; }
-.navCta { margin-left: var(--space-2); }
+.bookBtn { margin-left: var(--space-2); }
 
-.navToggle {
-  display: none; flex-direction: column;
-  gap: 5px; padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: background var(--transition-fast);
-}
-.navToggle:hover { background: var(--clr-surface); }
-.bar {
-  width: 22px; height: 2px;
-  background: var(--clr-navy);
-  border-radius: var(--radius-full);
-  display: block;
-  transition: all var(--transition-base);
-  transform-origin: center;
-}
-.bar1Open { transform: translateY(7px) rotate(45deg); }
-.bar2Open { opacity: 0; transform: scaleX(0); }
-.bar3Open { transform: translateY(-7px) rotate(-45deg); }
+.toggle { display: none; flex-direction: column; gap: 5px; padding: var(--space-2); }
+.bar { width: 22px; height: 2px; background: var(--clr-navy); border-radius: 2px; display: block; transition: all var(--transition-base); transform-origin: center; }
+.b1 { transform: translateY(7px) rotate(45deg); }
+.b2 { opacity: 0; transform: scaleX(0); }
+.b3 { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 768px) {
   .navMenu {
-    position: fixed;
-    top: calc(var(--navbar-height) + 40px);
-    left: 0; right: 0;
-    background: var(--clr-white);
-    flex-direction: column;
-    padding: var(--space-6);
-    border-bottom: 1px solid var(--clr-border);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-110%);
-    transition: transform var(--transition-base);
-    z-index: 998;
-    gap: var(--space-4);
+    position: fixed; top: var(--navbar-height); left: 0; right: 0;
+    background: white; flex-direction: column; align-items: flex-start;
+    padding: var(--space-6); gap: var(--space-5);
+    box-shadow: var(--shadow-lg); border-bottom: 1px solid var(--clr-border);
+    transform: translateY(-110%); transition: transform var(--transition-base); z-index: 997;
   }
   .open { transform: translateY(0); }
-  .navToggle { display: flex; }
+  .toggle { display: flex; }
   .navLink { font-size: 1.0625rem; padding: var(--space-2) 0; }
-  .navCta { width: 100%; justify-content: center; margin-left: 0; }
+  .bookBtn { width: 100%; justify-content: center; margin-left: 0; }
 }

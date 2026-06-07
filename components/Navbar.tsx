@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from './Navbar.module.css'
@@ -7,61 +6,50 @@ import styles from './Navbar.module.css'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const fn = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
-
   const close = () => setOpen(false)
 
   return (
-    <>
-      <div className={styles.announcementBar} role="banner" aria-label="Clinic announcement">
-        <span>🎉 New Patient Special: Free Consultation &amp; X-Ray — </span>
-        <a href="#booking" className={styles.announcementLink} onClick={close}>Book Today</a>
+    <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+      <div className={`container ${styles.inner}`}>
+        {/* Logo */}
+        <Link href="/" className={styles.logo} aria-label="Dental Clinic home">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect width="42" height="42" rx="12" fill="#0057FF"/>
+            <path
+              d="M13 14 Q13 9 17.5 9 Q19.5 9 21 11.5 Q22.5 9 24.5 9 Q29 9 29 14 Q29 20 26 28 Q24.5 32 23 32 Q21.5 32 21 27.5 Q20.5 32 19 32 Q17.5 32 16 28 Q13 20 13 14Z"
+              fill="white"
+            />
+            <path d="M31 8 L31.8 10.2 L34 11 L31.8 11.8 L31 14 L30.2 11.8 L28 11 L30.2 10.2Z" fill="#93C5FD"/>
+          </svg>
+          <span className={styles.logoText}>Dental<span className={styles.logoAccent}> Clinic</span></span>
+        </Link>
+
+        {/* Desktop nav */}
+        <nav id="nav-menu" className={`${styles.navMenu} ${open ? styles.open : ''}`} aria-label="Main navigation">
+          {[
+            ['#home',     'Home'],
+            ['#services', 'Our Services'],
+            ['#doctors',  'Our Clinics'],
+            ['#testimonials','Blog'],
+            ['#contact',  'Location'],
+          ].map(([href, label]) => (
+            <a key={href} href={href} className={styles.navLink} onClick={close}>{label}</a>
+          ))}
+          <a href="#booking" className={`btn btn-dark btn-sm ${styles.bookBtn}`} onClick={close}>Book Online</a>
+        </nav>
+
+        <button className={styles.toggle} onClick={() => setOpen(!open)}
+          aria-expanded={open} aria-label="Toggle menu">
+          <span className={`${styles.bar} ${open ? styles.b1 : ''}`}/>
+          <span className={`${styles.bar} ${open ? styles.b2 : ''}`}/>
+          <span className={`${styles.bar} ${open ? styles.b3 : ''}`}/>
+        </button>
       </div>
-
-      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} role="navigation" aria-label="Main navigation">
-        <div className={`container ${styles.navInner}`}>
-          <Link href="/" className={styles.logo} aria-label="BrightSmile Dental Clinic home">
-            <svg className={styles.logoIcon} viewBox="0 0 40 40" aria-hidden="true">
-              <circle cx="20" cy="20" r="19" fill="#0ea5e9" stroke="#fff" strokeWidth="1"/>
-              <path d="M13 18c0-4 3.5-7 7-7s7 3 7 7c0 6-3 10-7 10s-7-4-7-10z" fill="#fff"/>
-              <path d="M17 14c0 0 1 3 3 3s3-3 3-3" stroke="#0ea5e9" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-            </svg>
-            <span className={styles.logoText}>Bright<span className={styles.logoAccent}>Smile</span></span>
-          </Link>
-
-          <button
-            className={styles.navToggle}
-            id="nav-toggle"
-            aria-expanded={open}
-            aria-controls="nav-menu"
-            aria-label="Toggle navigation menu"
-            onClick={() => setOpen(!open)}
-          >
-            <span className={`${styles.bar} ${open ? styles.bar1Open : ''}`} />
-            <span className={`${styles.bar} ${open ? styles.bar2Open : ''}`} />
-            <span className={`${styles.bar} ${open ? styles.bar3Open : ''}`} />
-          </button>
-
-          <nav id="nav-menu" className={`${styles.navMenu} ${open ? styles.open : ''}`} role="menu">
-            {[
-              { href: '#services', label: 'Services' },
-              { href: '#doctors',  label: 'Our Doctors' },
-              { href: '#testimonials', label: 'Reviews' },
-              { href: '#contact',  label: 'Contact' },
-            ].map(({ href, label }) => (
-              <a key={href} href={href} className={styles.navLink} role="menuitem" onClick={close}>{label}</a>
-            ))}
-            <a href="#booking" className={`btn btn-primary ${styles.navCta}`} role="menuitem" onClick={close}>
-              Book Appointment
-            </a>
-          </nav>
-        </div>
-      </header>
-    </>
+    </header>
   )
 }

@@ -28,7 +28,7 @@ export default function AccessibilitySection() {
         </div>
         <div className={styles.a11yContent}>
           <h2 id="accessibility-heading">Our Commitment to Accessibility</h2>
-          <p>BrightSmile Dental Clinic is dedicated to ensuring our services are accessible to everyone, regardless of ability. We strive to meet WCAG 2.1 AA standards across all touchpoints.</p>
+          <p>Dental Clinic is dedicated to ensuring our services are accessible to everyone, regardless of ability. We strive to meet WCAG 2.1 AA standards across all touchpoints.</p>
           <div className={styles.a11yFeatures} role="list">
             {features.map((f) => (
               <div key={f} className={styles.a11yFeature} role="listitem">
@@ -36,7 +36,7 @@ export default function AccessibilitySection() {
               </div>
             ))}
           </div>
-          <a href="mailto:accessibility@brightsmile.com" className="btn btn-outline" aria-label="Contact us about accessibility needs">
+          <a href="mailto:accessibility@dentalclinic.com" className="btn btn-outline" aria-label="Contact us about accessibility needs">
             Contact Our Accessibility Team
           </a>
         </div>

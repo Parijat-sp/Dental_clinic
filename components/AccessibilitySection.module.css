@@ -1,7 +1,8 @@
-.a11ySection { background: var(--clr-primary-light); border-top: 1px solid #bae6fd; border-bottom: 1px solid #bae6fd; }
+.a11ySection { background: var(--clr-blue-light); border-top: 1px solid rgba(0,87,255,.15); border-bottom: 1px solid rgba(0,87,255,.15); }
 .a11yInner { display: flex; align-items: center; gap: var(--space-10); }
 .a11yIcon { flex-shrink: 0; }
-.a11yContent h2 { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); color: var(--clr-navy); margin-bottom: var(--space-3); }
+.a11yContent h2 { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; color: var(--clr-navy); margin-bottom: var(--space-3); letter-spacing: -.02em; }
+.a11yContent h2 span { color: var(--clr-blue); }
 .a11yContent p { font-size: .9375rem; color: var(--clr-slate); margin-bottom: var(--space-6); line-height: 1.7; }
 .a11yFeatures { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-3); margin-bottom: var(--space-6); }
 .a11yFeature { display: flex; align-items: center; gap: var(--space-2); font-size: .875rem; color: var(--clr-navy); font-weight: 500; }
