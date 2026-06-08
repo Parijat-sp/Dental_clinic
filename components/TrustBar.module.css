@@ -9,6 +9,8 @@
   border-bottom: 1px solid var(--clr-border);
   padding: var(--space-5) 0;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 .track {
   display: flex;

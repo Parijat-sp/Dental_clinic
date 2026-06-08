@@ -82,8 +82,9 @@
   }
 }
 @media (max-width: 480px) {
+  :global(:root) { --navbar-height: 64px; }
   .inner { height: 64px; }
   .logoText { font-size: 1.0625rem; }
-  .navMenu { padding: var(--space-5); gap: var(--space-4); }
+  .navMenu { padding: var(--space-5); gap: var(--space-4); top: 64px; }
   .navLink { font-size: 1rem; }
 }
