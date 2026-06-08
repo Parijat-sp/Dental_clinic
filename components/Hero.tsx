@@ -47,7 +47,7 @@ export default function Hero() {
         <div className={styles.content}>
           <div className={styles.datePill} aria-label="Clinic hours">
             <span className={styles.dot} />
-            <span>We&apos;re Open Today · 09 AM – 16 PM</span>
+            <span>We&apos;re Open Today · 09 AM – 6 PM</span>
           </div>
 
           <h1 id="hero-heading" className={styles.heading}>
