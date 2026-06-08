@@ -46,3 +46,11 @@
 
 @media (max-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } .ratingBar { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 480px) {
+  .card { padding: var(--space-5); gap: var(--space-3); }
+  .quoteIcon { font-size: 2.25rem; }
+  .quote { font-size: .875rem; }
+  .score { font-size: 2.75rem; }
+  .ratingBar { padding: var(--space-5); }
+  .grid { gap: var(--space-4); margin-bottom: var(--space-6); }
+}

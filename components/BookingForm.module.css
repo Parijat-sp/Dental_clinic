@@ -91,4 +91,17 @@ a.contactItem:hover { color: var(--clr-primary); }
 .formDisclaimer svg { color: var(--clr-success); }
 
 @media (max-width: 1024px) { .bookingInner { grid-template-columns: 1fr; } }
-@media (max-width: 768px)  { .formRow { grid-template-columns: 1fr; } .bookingFormWrap { padding: var(--space-5); } }
+@media (max-width: 768px)  {
+  .formRow { grid-template-columns: 1fr; }
+  .bookingFormWrap { padding: var(--space-5); }
+  .bookingInfo h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+}
+@media (max-width: 480px) {
+  .bookingFormWrap { padding: var(--space-4); border-radius: var(--radius-lg); }
+  .formTitle { font-size: 1.125rem; margin-bottom: var(--space-4); padding-bottom: var(--space-3); }
+  .bookingHours { padding: var(--space-4); }
+  .hoursRow { font-size: .8125rem; }
+  .formGroup input, .formGroup select, .formGroup textarea { font-size: .875rem; padding: .625rem var(--space-3); }
+  .formGroup label { font-size: .8125rem; }
+  .bookingSection :global(.section-padding) { padding: var(--space-12) 0; }
+}

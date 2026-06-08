@@ -16,7 +16,21 @@
 .logoText { font-size: 1.25rem; font-weight: 800; color: var(--clr-navy); letter-spacing: -.02em; }
 .logoAccent { color: var(--clr-blue); }
 
-.navMenu { display: flex; align-items: center; gap: var(--space-8); }
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  background: rgba(255,255,255,.55);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+          backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.70);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.80),
+    inset 0 -1px 0 rgba(0,0,0,.04),
+    0 4px 20px rgba(13,13,43,.07);
+}
 .navLink {
   font-size: .9375rem; font-weight: 500; color: var(--clr-slate);
   position: relative; padding-bottom: 2px;
@@ -29,7 +43,18 @@
 }
 .navLink:hover { color: var(--clr-navy); }
 .navLink:hover::after { width: 100%; }
-.bookBtn { margin-left: var(--space-2); }
+.bookBtn {
+  /* Override .btn-dark with a crisper dark glass pill for the nav */
+  background: rgba(13,13,43,.82) !important;
+  border-color: rgba(255,255,255,.22) !important;
+  color: #fff !important;
+  font-size: .875rem !important;
+  padding: .625rem 1.375rem !important;
+  letter-spacing: .02em;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 4px 18px rgba(13,13,43,.30) !important;
+}
 
 .toggle { display: none; flex-direction: column; gap: 5px; padding: var(--space-2); }
 .bar { width: 22px; height: 2px; background: var(--clr-navy); border-radius: 2px; display: block; transition: all var(--transition-base); transform-origin: center; }
@@ -43,10 +68,22 @@
     background: white; flex-direction: column; align-items: flex-start;
     padding: var(--space-6); gap: var(--space-5);
     box-shadow: var(--shadow-lg); border-bottom: 1px solid var(--clr-border);
+    border-radius: 0;
     transform: translateY(-110%); transition: transform var(--transition-base); z-index: 997;
   }
   .open { transform: translateY(0); }
   .toggle { display: flex; }
   .navLink { font-size: 1.0625rem; padding: var(--space-2) 0; }
-  .bookBtn { width: 100%; justify-content: center; margin-left: 0; }
+  .bookBtn {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-left: 0 !important;
+    padding: .875rem 1.375rem !important;
+  }
+}
+@media (max-width: 480px) {
+  .inner { height: 64px; }
+  .logoText { font-size: 1.0625rem; }
+  .navMenu { padding: var(--space-5); gap: var(--space-4); }
+  .navLink { font-size: 1rem; }
 }
