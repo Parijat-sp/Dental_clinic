@@ -1,11 +1,12 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
-  delay?: number       // extra delay in ms
-  direction?: 'up' | 'left' | 'right' | 'fade'
+  delay?: number // delay in seconds for framer-motion
+  direction?: 'up' | 'left' | 'right' | 'fade' | 'none'
   threshold?: number
 }
 
@@ -16,46 +17,29 @@ export default function ScrollReveal({
   direction = 'up',
   threshold = 0.15,
 }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.style.opacity = '1'
-            el.style.transform = 'none'
-          }, delay)
-          observer.unobserve(el)
-        }
-      },
-      { threshold }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [delay, threshold])
-
   const initTransform =
-    direction === 'up'    ? 'translateY(40px)' :
-    direction === 'left'  ? 'translateX(-40px)' :
-    direction === 'right' ? 'translateX(40px)' : 'none'
+    direction === 'up' ? { y: 40, opacity: 0 } :
+    direction === 'left' ? { x: -40, opacity: 0 } :
+    direction === 'right' ? { x: 40, opacity: 0 } :
+    direction === 'fade' ? { opacity: 0 } : 
+    { opacity: 1, x: 0, y: 0 }
+
+  const finalTransform = 
+    direction === 'none' ? { opacity: 1, x: 0, y: 0 } : { opacity: 1, x: 0, y: 0 }
 
   return (
-    <div
-      ref={ref}
+    <motion.div
       className={className}
-      style={{
-        opacity: 0,
-        transform: initTransform,
-        transition: `opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1)`,
-        willChange: 'opacity, transform',
+      initial={initTransform}
+      whileInView={finalTransform}
+      viewport={{ once: true, amount: threshold }}
+      transition={{
+        duration: 0.8,
+        delay: delay,
+        ease: [0.16, 1, 0.3, 1], // Custom sleek ease out
       }}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }

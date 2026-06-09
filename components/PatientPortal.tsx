@@ -1,4 +1,7 @@
+'use client'
 import styles from './PatientPortal.module.css'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 const features = [
   {
@@ -29,9 +32,24 @@ const features = [
 ]
 
 export default function PatientPortal() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Parallax value for the background image
+  const bgY = useTransform(scrollYProgress, [0, 1], [-150, 150])
+
   return (
-    <section className={`${styles.portalSection} section-padding`} id="portal" aria-labelledby="portal-heading">
-      <div className={`container ${styles.portalInner}`}>
+    <section ref={sectionRef} className={`${styles.portalSection} section-padding`} id="portal" aria-labelledby="portal-heading" style={{ position: 'relative', overflow: 'hidden' }}>
+      
+      {/* Background Image Parallax */}
+      <motion.div style={{ y: bgY, position: 'absolute', top: 0, right: '-20%', width: '600px', opacity: 0.15, zIndex: 0, pointerEvents: 'none' }}>
+        <img src="/assets/portal_bg.png" alt="Portal Background" style={{ width: '100%', borderRadius: '24px' }} />
+      </motion.div>
+
+      <div className={`container ${styles.portalInner}`} style={{ position: 'relative', zIndex: 1 }}>
         <div className={styles.portalContent}>
           <span className="section-tag section-tag--light">Digital Convenience</span>
           <h2 id="portal-heading">Your Health, At Your Fingertips</h2>

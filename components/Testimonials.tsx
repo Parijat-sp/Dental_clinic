@@ -1,5 +1,8 @@
+'use client'
 import ScrollReveal from './ScrollReveal'
 import styles from './Testimonials.module.css'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 const testimonials = [
   {
@@ -24,9 +27,24 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Parallax value
+  const bgY = useTransform(scrollYProgress, [0, 1], [-100, 100])
+
   return (
-    <section className={`section-padding ${styles.section}`} id="testimonials" aria-labelledby="testimonials-heading">
-      <div className="container">
+    <section ref={sectionRef} className={`section-padding ${styles.section}`} id="testimonials" aria-labelledby="testimonials-heading" style={{ position: 'relative', overflow: 'hidden' }}>
+      
+      {/* Background Parallax Image */}
+      <motion.div style={{ y: bgY, position: 'absolute', top: '20%', left: '-10%', width: '400px', opacity: 0.1, zIndex: 0, pointerEvents: 'none' }}>
+        <img src="/assets/happy_family_dental.png" alt="Happy family" style={{ width: '100%', borderRadius: '24px' }} />
+      </motion.div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-header">
           <span className="section-tag">Patient Reviews</span>
           <h2 id="testimonials-heading">What Our <span>Patients</span> Say</h2>
@@ -35,7 +53,7 @@ export default function Testimonials() {
 
         <div className={styles.grid} role="list">
           {testimonials.map(({ quote, name, role, initials, featured }, i) => (
-            <ScrollReveal key={name} delay={i * 100} direction="up">
+            <ScrollReveal key={name} delay={i * 0.1} direction="up">
               <article className={`${styles.card} ${featured ? styles.featured : ''}`} role="listitem">
                 <div className={styles.quoteIcon} aria-hidden="true">“</div>
                 <p className={styles.quote}>{quote}</p>

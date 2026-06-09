@@ -1,5 +1,8 @@
+'use client'
 import ScrollReveal from './ScrollReveal'
 import styles from './Services.module.css'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 const services = [
   {
@@ -48,9 +51,19 @@ const services = [
 ]
 
 export default function Services() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Parallax values
+  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const y2 = useTransform(scrollYProgress, [0, 1], [-100, 100])
+
   return (
-    <section className={`section-padding ${styles.section}`} id="services" aria-labelledby="services-heading">
-      <div className="container">
+    <section ref={sectionRef} className={`section-padding ${styles.section}`} id="services" aria-labelledby="services-heading" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="section-header">
           <span className="section-tag">What We Offer</span>
           <h2 id="services-heading">Our <span>Dental</span> Services</h2>
@@ -58,7 +71,7 @@ export default function Services() {
         </div>
         <div className={styles.grid} role="list">
           {services.map((s, i) => (
-            <ScrollReveal key={s.title} delay={i * 80} direction="up">
+            <ScrollReveal key={s.title} delay={i * 0.1} direction="up">
               <article
                 className={`${styles.card} ${s.featured ? styles.featured : ''}`}
                 role="listitem" tabIndex={0}>
@@ -77,6 +90,14 @@ export default function Services() {
           ))}
         </div>
       </div>
+      
+      {/* Decorative Parallax Images */}
+      <motion.div style={{ y: y1, position: 'absolute', top: '10%', left: '-10%', width: '400px', opacity: 0.1, zIndex: 1, pointerEvents: 'none' }}>
+        <img src="/assets/dental_service_1.png" alt="Dental Service" style={{ width: '100%', borderRadius: '24px' }} />
+      </motion.div>
+      <motion.div style={{ y: y2, position: 'absolute', bottom: '10%', right: '-10%', width: '400px', opacity: 0.1, zIndex: 1, pointerEvents: 'none' }}>
+        <img src="/assets/dental_service_2.png" alt="Happy Patient" style={{ width: '100%', borderRadius: '24px' }} />
+      </motion.div>
     </section>
   )
 }

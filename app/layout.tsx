@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import SmoothScroller from '@/components/SmoothScroller'
+import Preloader from '@/components/Preloader'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -40,7 +42,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body style={{overflowX:'hidden'}}>{children}</body>
+      <body style={{overflowX:'hidden'}}>
+        <Preloader />
+        <SmoothScroller>
+          {children}
+        </SmoothScroller>
+      </body>
     </html>
   )
 }

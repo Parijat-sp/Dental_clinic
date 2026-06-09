@@ -1,7 +1,9 @@
-import React from 'react'
+'use client'
+import React, { useRef } from 'react'
 import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
 import styles from './Doctors.module.css'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const doctors = [
   {
@@ -38,9 +40,24 @@ const SocialIcon = ({ type }: { type: string }) => {
 }
 
 export default function Doctors() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Parallax value
+  const bgY = useTransform(scrollYProgress, [0, 1], [-100, 100])
+
   return (
-    <section className={`section-padding ${styles.section}`} id="doctors" aria-labelledby="doctors-heading">
-      <div className="container">
+    <section ref={sectionRef} className={`section-padding ${styles.section}`} id="doctors" aria-labelledby="doctors-heading" style={{ position: 'relative', overflow: 'hidden' }}>
+      
+      {/* Background Parallax Image */}
+      <motion.div style={{ y: bgY, position: 'absolute', top: '10%', right: '-15%', width: '500px', opacity: 0.08, zIndex: 0, pointerEvents: 'none' }}>
+        <img src="/assets/dentist_team.png" alt="Dentist team" style={{ width: '100%', borderRadius: '24px' }} />
+      </motion.div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className={`section-header ${styles.header}`}>
           <span className="section-tag">Our Team</span>
           <h2 id="doctors-heading">Dedicated <span>Dentists</span></h2>
@@ -49,7 +66,7 @@ export default function Doctors() {
 
         <div className={styles.grid} role="list">
           {doctors.map((d, i) => (
-            <ScrollReveal key={d.name} delay={i * 120} direction={i === 0 ? 'left' : i === 2 ? 'right' : 'up'}>
+            <ScrollReveal key={d.name} delay={i * 0.12} direction={i === 0 ? 'left' : i === 2 ? 'right' : 'up'}>
               <article className={`${styles.card} ${d.featured ? styles.featured : ''}`} role="listitem">
                 <div className={styles.imgWrap}>
                   <Image
